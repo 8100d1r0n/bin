@@ -7,7 +7,7 @@ fi
 playlist="$HOME/.tv_playlist"
 
 if [[ -f "$playlist" ]]; then
-  search_results="$(grep  --color=always -i "$1" $playlist)"
+  search_results="$(grep  -i "$1" $playlist)"
   num_results=$(echo -e "$search_results" | wc -l)
 
   if [[ -z "$search_results" ]]; then
