@@ -3,7 +3,7 @@
 # ~/bin/dwm-start
 #
 
-/home/lone/bin/dwm-statusbar &
+/home/wolf/bin/dwm-statusbar &
 
 while true; do
     # Log stderror to a file
