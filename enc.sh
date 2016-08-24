@@ -6,8 +6,8 @@
 # File Name: enc.sh
 #########################################################################
 function usage() {
-    echo -e "Usage:\n./`basename $0` -e ScriptFile CreateEncryptFileName"
-    echo -e "./`basename $0` -r RunEncrytFileName"
+    echo -e "Usage:\n./`basename $0` -e ScriptFile"
+    echo -e "./`basename $0` -r EncrytFile"
 }
 if [ -z "$1" ]
 then
@@ -22,7 +22,7 @@ do
             exit 1;
             ;;
         -e|--encrypt)
-            openssl enc -e -aes-256-cbc -a -in "$2" -out "$3"
+            openssl enc -e -aes-256-cbc -a -in "$2" -out "$2.enc"
             exit 1;
             ;;
         -h|--help)
