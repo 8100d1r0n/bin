@@ -6,8 +6,8 @@
 # File Name: enc.sh
 #########################################################################
 function usage() {
-    echo -e "Usage:\n./`basename $0` -e ScriptFile"
-    echo -e "./`basename $0` -r EncrytFile"
+    echo -e "Usage:\n\t./`basename $0` -e ScriptFile"
+    echo -e "\t./`basename $0` -r EncryptFile"
 }
 if [ -z "$1" ]
 then
