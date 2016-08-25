@@ -5,9 +5,9 @@
 # Created Time: 2016-08-24T03:23:20+0300
 # File Name: enc.sh
 #########################################################################
-function usage() {
-    echo -e "Usage:\n\t./`basename $0` -e ScriptFile"
-    echo -e "\t./`basename $0` -r EncryptFile"
+usage() {
+    echo -e "Usage:\n\t./`basename $0` -e ScriptFile\n" \
+            "\t./`basename $0` -r EncryptFile"
 }
 if [ -z "$1" ]
 then
@@ -18,7 +18,7 @@ while [ $# -gt 0 ]
 do
     case "$1" in
         -r|--run)
-            openssl enc -d -aes-256-cbc -a -in "$2" | sh -
+            openssl enc -d -aes-256-cbc -a -in "$2" | bash -
             exit 1;
             ;;
         -e|--encrypt)
