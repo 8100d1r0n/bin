@@ -5,12 +5,15 @@ if [[ -z $1 ]]; then
 fi
 
 playlist="$HOME/.tv_playlist"
-show() {
-show_token=`curl -s http://www.showtv.com.tr/canli-yayin/showtv | sed 's/[/.",]/\n/g' | grep \?token | cut -d= -f2`
-sed -i '19d' ${playlist}
-echo -e "http://mn-i.mncdn.com/showtv_ios/smil:showtv.smil/chunklist_w1493347491_b348000.m3u8\?token=${show_token}" >> ${playlist}
+token() {
+	show_token=`curl -s http://www.showtv.com.tr/canli-yayin/showtv | sed 's/[/.",]/\n/g' | grep \?token | cut -d\= -f2`
+        fox_token=`curl -s  http://www.fox.com.tr/canli-yayin | sed 's/[/.",]/\n/g' | grep \?token | cut -d\= -f2 | head -1 | tr -cd '[:xdigit:]'`
+        sed -i '16,18d' ${playlist}
+	echo -e "http://mn-i.mncdn.com/showtv_ios/smil:showtv.smil/chunklist_w1493347491_b348000.m3u8\?token=${show_token}" >> ${playlist}
+        echo -e "http://mn-i.mncdn.com/foxtv_mobile/smil:foxtv.smil/playlist.m3u8\?token=${fox_token}" >> ${playlist}
 }
-show
+token
+
 if [[ -f "$playlist" ]]; then
   search_results="$(grep -i "$1" $playlist)"
   num_results=$(echo -e "$search_results" | wc -l)
@@ -23,7 +26,7 @@ if [[ -f "$playlist" ]]; then
     echo -e "\n\e[91mMultitple results found. Refine search.\e[0m"
     exit 1
   else
-    sh -c "mpv -really-quiet -cache 4092 $search_results"
+    sh -c "mpv -really-quiet -cache 2048 $search_results"
   fi
 else
   echo -e "\e[91mPlaylist not found\e[0m"
